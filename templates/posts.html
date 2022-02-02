@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Articles
+{% endblock %}
+
+{% block content %}
+
+     <div class="container">
+        {% for message in get_flashed_messages() %}
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="container">
+        <h1>All posts on the site</h1>
+    {% if articles|length > 0 %}
+        {% for article in articles %}
+            <div class="alert alert-secondary">
+                <a class="link" href="/posts/{{ article.id }}"><h3>{{ article.title }}</h3></a>
+                <hr>
+                <h5>{{ article.intro }}</h5>
+                <p>Author: {{ article.poster.name }}</p>
+                <p>Date: {{ article.date.date() }}</p>
+                <a href="/posts/{{ article.id }}" class="btn btn-outline-dark btn-sm">View Post</a>
+            {% if article.poster_id == current_user.id %}
+                <a href="/posts/{{ article.id }}/update" class="btn btn-outline-secondary btn-sm">Edit Post</a>
+                <a href="/posts/{{ article.id }}/delete" class="btn btn-outline-danger btn-sm">Delete Post</a>
+            {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No articles yet.</p>
+    {% endif %}
+    </div>
+{% endblock %}

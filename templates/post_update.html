@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+     Editing an article
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <form method="post">
+                {{ form.hidden_tag()}}
+
+                    {{ form.title.label(class="form-label") }}<br>
+                    {{ form.title(class="form-control") }}<br>
+
+                    {{ form.intro.label(class="form-label") }}<br>
+                    {{ form.intro(class="form-control") }}<br>
+
+                    {{ form.slug.label(class="form-label") }}<br>
+                    {{ form.slug(class="form-control") }}<br>
+
+                    {{ form.text.label(class="form-label") }}<br>
+                    {{ form.text(class="form-control", rows=4 ) }}<br>
+
+                    {{ form.submit(class="btn btn-dark") }}
+            </form>
+            {{ ckeditor.load() }}
+            {{ ckeditor.config(name='text') }}
+        </div>
+    </div>
+{% endblock %}

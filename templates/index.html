@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    main
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Hello motherfucker!</h1>
+    </div>
+    <div class="container">
+        {% for user in users %}
+            <p>{{user.id}} - {{user.username}}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

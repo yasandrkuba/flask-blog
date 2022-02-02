@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Search for:  <i style="color:blue;">{{ post_searched }}</i></h1>
+        <br>
+    </div>
+
+    {% for post in posts %}
+    <div class="container">
+        <div class="alert alert-secondary">
+                <a class="link" href="/posts/{{ post.id }}"><h3>{{ post.title }}</h3></a>
+                <hr>
+                <h5>{{ post.intro }}</h5>
+                <p>Author: {{ post.poster.name }}</p>
+                <p>Date: {{ post.date.date() }}</p>
+                <a href="/posts/{{ post.id }}" class="btn btn-outline-dark btn-sm">View Post</a>
+            {% if post.poster_id == current_user.id %}
+                <a href="/posts/{{ post.id }}/update" class="btn btn-outline-secondary btn-sm">Edit Post</a>
+                <a href="/posts/{{ post.id }}/delete" class="btn btn-outline-danger btn-sm">Delete Post</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

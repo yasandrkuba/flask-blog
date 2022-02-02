@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Updade user
+{% endblock title %}
+
+{% block content%}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    {% if user_to_update.id == current_user.id %}
+
+    <div class="container">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <form enctype="multipart/form-data" method="post" action="/user/update/{{ user_to_update.id }}">
+                {{ form.hidden_tag() }}
+
+                {{ form.username.label(class="form-label") }}<br/>
+                {{ form.username(class="form-control", value=user_to_update.username) }}<br/>
+
+                {{ form.name.label(class="form-label") }}<br/>
+                {{ form.name(class="form-control", value=user_to_update.name) }}<br/>
+
+                {{ form.email.label(class="form-label") }}<br/>
+                {{ form.email(class="form-control", value=user_to_update.email) }}<br/>
+
+                {{ form.profile_picture.label(class="form-label") }}<br/>
+                {{ form.profile_picture(class="form-control") }}<br/>
+
+                {{ form.submit(class='btn btn-dark') }}
+            </form>
+        </div>
+    </div>
+
+    {% else %}
+        <div class="container">
+        {% for message in get_flashed_messages() %}
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Sorry! You Can't Edit This User...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        {% endfor %}
+        <h1>Access Denied!</h1>
+        <p>Sorry, you cannot access this user profile...</p>
+    </div>
+    {% endif %}
+
+    {% endblock content%}
