@@ -201,10 +201,10 @@ def add_user():
             flash('Such user already exists')
 
         return redirect(url_for('dashboard'))
-    users = Users.query.order_by(Users.date_added).all()
+    # users = Users.query.order_by(Users.date_added).all()
     user = Users.query.filter_by(email=form.email.data).first()
 
-    return render_template('registration.html', form=form, users=users, user=user)
+    return render_template('registration.html', form=form, user=user)
 
 
 @app.route('/user', methods=['POST', 'GET'])
