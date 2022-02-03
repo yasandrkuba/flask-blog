@@ -12,7 +12,8 @@ import os
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://mdedycfriararh:62b04cb2b069683589a6291360e095cd8ae40baad08cba2a11d4e6a796cc9676@ec2-34-205-209-14.compute-1.amazonaws.com:5432/dbq9pk5ki8p1po'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret key'
 db = SQLAlchemy(app)
@@ -166,7 +167,6 @@ def user_update(id):
         picture_name = str(uuid.uuid1()) + '_' + picture_filename
         user_to_update.profile_picture.save(os.path.join(app.config['UPLOAD_FOLDER'], picture_name))
         user_to_update.profile_picture = picture_name
-
 
         try:
             db.session.commit()
