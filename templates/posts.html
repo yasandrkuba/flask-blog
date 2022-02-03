@@ -22,7 +22,8 @@
     {% if articles|length > 0 %}
         {% for article in articles %}
             <div class="alert alert-secondary">
-                <a class="link" href="/posts/{{ article.id }}"><h3>{{ article.title }}</h3></a>
+                <a style="text-decoration:none;" class="link"
+                   href="/posts/{{ article.id }}"><h3>{{ article.title }}</h3></a>
                 <hr>
                 <h5>{{ article.intro }}</h5>
                 <p>Author: {{ article.poster.name }}</p>
